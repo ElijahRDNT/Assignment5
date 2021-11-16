@@ -16,6 +16,14 @@ def input_validation(first_try, second_try, third_try):
         try:
             first_int, second_int, third_int = float(
                 first_try), float(second_try), float(third_try)
+            if (first_int - int(first_int) == 0):
+                first_int = int(first_int)
+
+            if (second_int - int(second_int) == 0):
+                second_int = int(second_int)
+
+            if (third_int - int(third_int) == 0):
+                third_int = int(third_int)
 
             return first_int, second_int, third_int
 
