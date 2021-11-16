@@ -9,16 +9,16 @@
 import math
 
 
-def get_input():
+def get_input():    # function for collecting inputs to be stored in a global variable
     print("\nGood day!")
     grade_input = input(
         "\nNote: Avoid putting unnecessary symbols. Only numbers and a decimal point(if applicable) are allowed. Thank you.\n\nInput grade: ")
     return grade_input
 
 
-def round_half_up(grade_round, decimals=0):
-    multiplier = 10 ** decimals
-    if (grade_round >= 100.1):
+def round_half_up(grade_round, decimals=0): # instead of using the simple round() function which round n.5 to the nearest even number, is used this function
+    multiplier = 10 ** decimals             # in simple round() function, 2.5 will be rounded as 2 instead of 3
+    if (grade_round >= 100.1):              # but with this function, numbers will be rounded properly. For example, 4.5 will be rounded as 5
         return 1000
     else:
         rounded_grade = math.floor(grade_round*multiplier + 0.5) / multiplier
@@ -26,23 +26,23 @@ def round_half_up(grade_round, decimals=0):
 
 
 def input_validation(grade_try):
-    if (grade_try == ""):
+    if (grade_try == ""):   #this is for the empty inputs. See what will happen if this condition is satisfied in the lower part of the program
         grade_try = "null"
         return grade_try
 
     else:
         try:
-            grade_float = float(grade_try)
+            grade_float = float(grade_try)  # this restricts inputs that are not convertable to float datatype
             grade_rounded = round_half_up(grade_float)
             return grade_rounded
 
-        except ValueError:
+        except ValueError:  # this runs if the input is not convertable to float datatype
             print(
                 "\nInvalid input. Please enter numbers and a decimal point(if applicable) only.\n")
             return False
 
 
-def grade_classification(grade_classify):
+def grade_classification(grade_classify):   # this is the function for the grade mark
     if (grade_classify == "null"):
         mark = "Blank"
         print(f"Grade/Mark: {mark}")
@@ -104,7 +104,7 @@ def grade_classification(grade_classify):
         return mark
 
 
-def grade_description(grade_describe):
+def grade_description(grade_describe):  # this is the function for the grade description
     if (grade_describe == 1.0) or (grade_describe == 1.25):
         description = "Excellent"
         print(f"Description: {description}\n")
@@ -142,6 +142,6 @@ def grade_description(grade_describe):
 grade = get_input()
 valid_grade = input_validation(grade)
 
-if (valid_grade != False):
+if (valid_grade != False): # if the returned value of input_validation() is not false, the program proceeds. If false, the program ends.
     grade_classified = grade_classification(valid_grade)
     grade_described = grade_description(grade_classified)
