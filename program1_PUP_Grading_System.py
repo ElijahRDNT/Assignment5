@@ -6,6 +6,9 @@
 # Grade/Mark: 1.75
 # Description: Very Good
 
+import math
+
+
 def get_input():
     print("\nGood day!")
     grade_input = input(
@@ -13,10 +16,19 @@ def get_input():
     return grade_input
 
 
+def round_half_up(grade_round, decimals=0):
+    multiplier = 10 ** decimals
+    if (grade_round >= 100.1):
+        return 1000
+    else:
+        rounded_grade = math.floor(grade_round*multiplier + 0.5) / multiplier
+        return rounded_grade
+
 def input_validation(grade_try):
     try:
         grade_float = float(grade_try)
-        return grade_float
+        grade_rounded = round_half_up(grade_float)
+        return grade_rounded
 
     except ValueError:
         print(
@@ -73,6 +85,11 @@ def grade_classification(grade_classify):
     elif(97 <= grade_classify <= 100):
         mark = 1.0
         print(f"Grade/Mark: {mark}")
+        return mark
+
+    elif(64 >= grade_classify) or (grade_classify == 1000):
+        mark = 0
+        print("Grade/Mark: Can't be classified")
         return mark
 
 
