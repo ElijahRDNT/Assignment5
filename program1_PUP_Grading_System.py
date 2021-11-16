@@ -24,20 +24,31 @@ def round_half_up(grade_round, decimals=0):
         rounded_grade = math.floor(grade_round*multiplier + 0.5) / multiplier
         return rounded_grade
 
-def input_validation(grade_try):
-    try:
-        grade_float = float(grade_try)
-        grade_rounded = round_half_up(grade_float)
-        return grade_rounded
 
-    except ValueError:
-        print(
-            "\nInvalid input. Please enter numbers and a decimal point(if applicable) only.\n")
-        return False
+def input_validation(grade_try):
+    if (grade_try == ""):
+        grade_try = "null"
+        return grade_try
+
+    else:
+        try:
+            grade_float = float(grade_try)
+            grade_rounded = round_half_up(grade_float)
+            return grade_rounded
+
+        except ValueError:
+            print(
+                "\nInvalid input. Please enter numbers and a decimal point(if applicable) only.\n")
+            return False
 
 
 def grade_classification(grade_classify):
-    if (65 <= grade_classify <= 74):
+    if (grade_classify == "null"):
+        mark = "Blank"
+        print(f"Grade/Mark: {mark}")
+        return mark
+
+    elif (65 <= grade_classify <= 74):
         mark = 5.0
         print(f"Grade/Mark: {mark}")
         return mark
@@ -116,6 +127,15 @@ def grade_description(grade_describe):
 
     elif (grade_describe == 5.0):
         description = "Failure"
+        print(f"Description: {description}\n")
+
+    elif (grade_describe == 0):
+        description = "Invalid"
+        print(f"Description: {description}\n")
+        print("\nPlease enter a valid grade (ranging from 64.5 to 100.0).\n")
+
+    elif (grade_describe == "Blank"):
+        description = "Incomplete / Withdrawn / Dropped"
         print(f"Description: {description}\n")
 
 
