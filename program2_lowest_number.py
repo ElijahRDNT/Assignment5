@@ -5,10 +5,26 @@
 
 def get_input():
     print("Hi,\n\n")
-    first_i = int(input("Please enter the 1st number: "))
-    second_i = int(input("Please enter the 2nd number: "))
-    third_i = int(input("Please enter the 3rd number: "))
+    first_i = input("Please enter the 1st number: ")
+    second_i = input("Please enter the 2nd number: ")
+    third_i = input("Please enter the 3rd number: ")
     return first_i, second_i, third_i
+
+
+def input_validation(first_try, second_try, third_try):
+    if (first_try != "") and (second_try != "") and (third_try != ""):
+        try:
+            first_int, second_int, third_int = float(
+                first_try), float(second_try), float(third_try)
+
+            return first_int, second_int, third_int
+
+        except ValueError:
+            print("\nError. Please enter numbers.")
+            return False, False, False
+    else:
+        print("\nEmpty input is invalid. Please try again.")
+        return False, False, False
 
 
 def min_of_three(first_no, second_no, third_no):
@@ -20,5 +36,7 @@ def min_of_three(first_no, second_no, third_no):
         return third_no
 
 first, second, third = get_input()
-min = min_of_three(first, second, third)
-print(f"\nLowest number: {min}\n")
+first_valid, second_valid, third_valid = input_validation(first, second, third)
+if (first_valid != False) and (second_valid != False) and (third_valid != False):
+    min = min_of_three(first_valid, second_valid, third_valid)
+    print(f"\nLowest number: {min}\n")
